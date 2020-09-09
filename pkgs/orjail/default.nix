@@ -1,4 +1,4 @@
-{ bash, stdenv, fetchFromGitHub }: let
+{ stdenv, fetchFromGitHub, bash }: let
   rev = "a0b9e6c60b5952dcb286cceb595b29f9fd36ae95";
 in stdenv.mkDerivation rec {
   name = "orjail-${rev}";

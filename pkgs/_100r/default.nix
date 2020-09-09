@@ -1,39 +1,6 @@
 { lib, newScope, stdenv, pkgs, callPackage }: let
 
-  wrapHTMLinElectron = electron: name: main: ''
-    mkdir -p $out/lib/${name}
-    cp -r $src/* $out/lib/${name}
-    echo '{"main":"main.js"}' > $out/lib/${name}/package.json
-    cat ${main} > $out/lib/${name}/main.js
-
-    mkdir -p $out/bin
-    echo '#!/bin/sh' > $out/bin/${name}
-    echo "${electron}/bin/electron $out/lib/${name}" >> $out/bin/${name}
-    chmod +x $out/bin/${name}
-  '';
-
-  electronInSubdirInstallPhase = pname: ''
-    runHook preInstall
-    mkdir -p $out/{bin,libexec/${pname}}
-    mv node_modules $out/libexec/${pname}/node_modules
-    mv deps $out/libexec/${pname}/deps
-    runHook postInstall
-  '';
-
-  electronInSubdirDistPhase = electron: name: command: ''
-    cd $out
-    unlink "$out/libexec/${name}/deps/${name}/node_modules"
-    ln -s "$out/libexec/${name}/node_modules" "$out/libexec/${name}/deps/${name}/desktop/node_modules"
-    ls -al
-    ls -al libexec
-    mkdir -p bin
-    cd bin
-    echo '#!/bin/sh' > ${command}
-    echo "cd $out/libexec/${name}/deps/${name}" >> ${command}
-    echo "${electron}/bin/electron $out/libexec/${name}/deps/${name}/desktop" >> ${command}
-    chmod 0755 $out/bin/${command}
-    true
-  '';
+  electronHelpers = import ../electron-helpers.nix;
 
 in lib.makeScope newScope (self: {
 
@@ -50,7 +17,7 @@ in lib.makeScope newScope (self: {
     };
     buildInputs = [ electron ];
     phases      = [ "buildPhase" ];
-    buildPhase  = wrapHTMLinElectron electron "dotgrid" ./Dotgrid.main.js;
+    buildPhase  = electronHelpers.wrapHTML electron "dotgrid" ./Dotgrid.main.js;
   }) {};
 
   ronin = callPackage ({ pkgs, stdenv, electron_8 }: let
@@ -66,7 +33,7 @@ in lib.makeScope newScope (self: {
     };
     buildInputs = [ electron ];
     phases      = [ "buildPhase" ];
-    buildPhase  = wrapHTMLinElectron electron "ronin" ./Ronin.main.js;
+    buildPhase  = electronHelpers.wrapHTML electron "ronin" ./Ronin.main.js;
   }) {};
 
   left = callPackage ({ pkgs, stdenv, electron_7, mkYarnPackage }: let
@@ -84,8 +51,8 @@ in lib.makeScope newScope (self: {
     yarnLock     = ./Left.yarn.lock;
     buildInputs  = [ electron ];
     pname        = "Left";
-    installPhase = electronInSubdirInstallPhase pname;
-    distPhase    = electronInSubdirDistPhase electron pname "left";
+    installPhase = electronHelpers.subdirInstallPhase pname;
+    distPhase    = electronHelpers.subdirDistPhase electron pname "left";
   }) {};
 
   orca = callPackage ({ pkgs, stdenv, electron_8, mkYarnPackage }: let
@@ -103,8 +70,8 @@ in lib.makeScope newScope (self: {
     yarnLock     = ./Orca.yarn.lock;
     buildInputs  = [ electron ];
     pname        = "Orca";
-    installPhase = electronInSubdirInstallPhase pname;
-    distPhase    = electronInSubdirDistPhase electron pname "orca-osc";
+    installPhase = electronHelpers.subdirInstallPhase pname;
+    distPhase    = electronHelpers.subdirDistPhase electron pname "orca-osc";
   }) {};
 
   marabu = callPackage ({ pkgs, stdenv, electron, mkYarnPackage }: let
@@ -121,8 +88,8 @@ in lib.makeScope newScope (self: {
     yarnLock     = ./Marabu.yarn.lock;
     buildInputs  = [ electron ];
     pname        = "Marabu";
-    installPhase = electronInSubdirInstallPhase pname;
-    distPhase    = electronInSubdirDistPhase electron pname "marabu";
+    installPhase = electronHelpers.subdirInstallPhase pname;
+    distPhase    = electronHelpers.subdirDistPhase electron pname "marabu";
   }) {};
 
   pilot = callPackage ({ pkgs, stdenv, electron_5, mkYarnPackage }: let
@@ -140,8 +107,8 @@ in lib.makeScope newScope (self: {
     yarnLock     = ./Pilot.yarn.lock;
     buildInputs  = [ electron ];
     pname        = "Pilot";
-    installPhase = electronInSubdirInstallPhase pname;
-    distPhase    = electronInSubdirDistPhase electron pname "pilot-osc";
+    installPhase = electronHelpers.subdirInstallPhase pname;
+    distPhase    = electronHelpers.subdirDistPhase electron pname "pilot-osc";
   }) {};
     
 })
