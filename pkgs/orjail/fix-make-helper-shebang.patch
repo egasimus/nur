@@ -1,0 +1,10 @@
+diff --git a/make-helper.bsh b/make-helper.bsh
+index 461ed57..da1c2ac 100755
+--- a/make-helper.bsh
++++ b/make-helper.bsh
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ 
+ ## Copyright (C) 2012 - 2018 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
+ ## See the file COPYING for copying conditions.
