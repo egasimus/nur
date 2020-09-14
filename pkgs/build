@@ -1,3 +1,0 @@
-#!/bin/sh
-NixExpression="(import <nixpkgs> {}).callPackage $1 {}"
-nix-build -E "$NixExpression" --show-trace
