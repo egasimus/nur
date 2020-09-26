@@ -1,0 +1,13 @@
+diff --git a/Makefile.mk b/Makefile.mk
+index 9bb1790..4081f41 100644
+--- a/Makefile.mk
++++ b/Makefile.mk
+@@ -12,7 +12,7 @@ ifeq ($(M),)
+ $(error incorrect use of Makefile, M var is missing)
+ endif
+ 
+-PREFIX                = /usr
++PREFIX               := /usr
+ SRCDIR                = .
+ DLLS                  = wineasio.dll
+ 
