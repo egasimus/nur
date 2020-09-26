@@ -19,5 +19,6 @@
   praxis-live     = pkgs.callPackage ./pkgs/praxis-live     {};
   reaper          = pkgs.callPackage ./pkgs/reaper          {};
   tor             = pkgs.callPackage ./pkgs/tor             {};
+  troop           = pkgs.callPackage ./pkgs/troop           {};
   wineasio        = pkgs.callPackage ./pkgs/wineasio        {};
 }
