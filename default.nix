@@ -1,24 +1,27 @@
-{ pkgs ? import <nixpkgs> {} }: {
+{ pkgs ? import <nixpkgs> {} }: let
+  pkg = x: pkgs.callPackage x {};
+in {
 
   # special
   lib      = import ./lib { inherit pkgs; }; # functions
   modules  = import ./modules;               # NixOS modules
   overlays = import ./overlays;              # nixpkgs overlays
 
-  _100r           = pkgs.callPackage ./pkgs/_100r           {};
-  arcan           = pkgs.callPackage ./pkgs/arcan           {};
-  butterflow      = pkgs.callPackage ./pkgs/butterflow      {};
-  caprine         = pkgs.callPackage ./pkgs/caprine         {};
-  davinci-resolve = pkgs.callPackage ./pkgs/davinci-resolve {};
-  din             = pkgs.callPackage ./pkgs/din             {};
-  gh              = pkgs.callPackage ./pkgs/gh              {};
-  gxkb            = pkgs.callPackage ./pkgs/gxkb            {};
-  hydra           = pkgs.callPackage ./pkgs/hydra           {};
-  orjail          = pkgs.callPackage ./pkgs/orjail          {};
-  ossia           = pkgs.callPackage ./pkgs/ossia           {};
-  praxis-live     = pkgs.callPackage ./pkgs/praxis-live     {};
-  reaper          = pkgs.callPackage ./pkgs/reaper          {};
-  tor             = pkgs.callPackage ./pkgs/tor             {};
-  troop           = pkgs.callPackage ./pkgs/troop           {};
-  wineasio        = pkgs.callPackage ./pkgs/wineasio        {};
+  _100r                = pkg ./pkgs/_100r;
+  arcan                = pkg ./pkgs/arcan;
+  butterflow           = pkg ./pkgs/butterflow;
+  caprine              = pkg ./pkgs/caprine;
+  davinci-resolve      = pkg ./pkgs/davinci-resolve;
+  din                  = pkg ./pkgs/din;
+  gh                   = pkg ./pkgs/gh;
+  gxkb                 = pkg ./pkgs/gxkb;
+  hydra                = pkg ./pkgs/hydra;
+  orjail               = pkg ./pkgs/orjail;
+  ossia                = pkg ./pkgs/ossia;
+  pavucontrol-vertical = pkg ./pkgs/pavucontrol-vertical;
+  praxis-live          = pkg ./pkgs/praxis-live;
+  reaper               = pkg ./pkgs/reaper;
+  tor                  = pkg ./pkgs/tor;
+  troop                = pkg ./pkgs/troop;
+  wineasio             = pkg ./pkgs/wineasio;
 }
