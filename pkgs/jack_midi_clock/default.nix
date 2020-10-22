@@ -1,7 +1,7 @@
 { stdenv, fetchFromGitHub, jack2, pkgconfig }: let
   rev = "554baec3";
 in stdenv.mkDerivation rec {
-  name = "orjail-${rev}";
+  name = "jack_midi_clock-${rev}";
   src = fetchFromGitHub {
     owner = "x42";
     repo = "jack_midi_clock";
