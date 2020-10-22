@@ -7,6 +7,7 @@ in {
   modules  = import ./modules;               # NixOS modules
   overlays = import ./overlays;              # nixpkgs overlays
 
+  # programs
   _100r                = pkg ./pkgs/_100r;
   arcan                = pkg ./pkgs/arcan;
   butterflow           = pkg ./pkgs/butterflow;
@@ -21,6 +22,7 @@ in {
   ossia                = pkg ./pkgs/ossia;
   pavucontrol-vertical = pkg ./pkgs/pavucontrol-vertical;
   praxis-live          = pkg ./pkgs/praxis-live;
+  pugmenu              = pkg ./pkgs/pugmenu;
   reaper               = pkg ./pkgs/reaper;
   tor                  = pkg ./pkgs/tor;
   troop                = pkg ./pkgs/troop;
