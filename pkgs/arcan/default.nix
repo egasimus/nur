@@ -1,4 +1,4 @@
-{ lib, newScope, stdenv, pkgs }: let
+{ lib, newScope, stdenv, fetchgit, pkgs }: let
 
   # nicer aliases
   derive = stdenv.mkDerivation;
@@ -9,7 +9,7 @@
     name = "libuvc-src";
     # using fetchgit instead fetchFromGitHub because
     # the .git directory is needed by arcan's cmake scripts
-    src = pkgs.fetchgit {
+    src = fetchgit {
       leaveDotGit = true;
       url = "https://github.com/letoram/libuvc.git";
       rev = "v0.0.6";
@@ -56,7 +56,7 @@ in lib.makeScope newScope (self: with self; let
 
   arcanRev = "280bb2f1b39da4465e391158d7debba4a8c168c6";
 
-  arcanCoreSrc = pkgs.fetchgit {
+  arcanCoreSrc = fetchgit {
     leaveDotGit = true;
     url = "https://github.com/letoram/arcan.git";
     rev = arcanRev;
@@ -190,7 +190,7 @@ in {
 
   awb = mkArcanAppl {
     name = "awb";
-    src = pkgs.fetchgit {
+    src = fetchgit {
       leaveDotGit = true;
       url = "https://github.com/letoram/awb.git";
       rev = "271ef7ffd7f24569d2f836198e4c96b8c617e372";
@@ -201,7 +201,7 @@ in {
 
   prio = mkArcanAppl {
     name = "prio";
-    src = pkgs.fetchgit {
+    src = fetchgit {
       leaveDotGit = true;
       url = "https://github.com/letoram/prio.git";
       rev = "c3f97491339d15f063d6937d5f89bcfaea774dd1";
@@ -212,18 +212,18 @@ in {
 
   durden = mkArcanAppl {
     name = "durden";
-    src = pkgs.fetchgit {
+    src = fetchgit {
       leaveDotGit = true;
       url = "https://github.com/letoram/durden.git";
       rev = "bfbfe68bc325a5fb06ea1869a99404e277291a89";
-      sha256 = "11zfd1cf0sh63a9wrm5n129jmb5m0ibfh51ryjjjgxgx901k2qhi";
+      sha256 = "0d5g161xaccq3jxci9vwr2xn51ilrcdh3a9sdlsw3d64a1f4x4rv";
     };
     applRoot = "durden";
   };
 
   safespaces = mkArcanAppl {
     name = "safespaces";
-    src = pkgs.fetchgit {
+    src = fetchgit {
       leaveDotGit = true;
       url = "https://github.com/letoram/safespaces.git";
       rev = "https://github.com/letoram/safespaces/commit/58eef59afba091293cab4d2b156e725f75d92eaf";
