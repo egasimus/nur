@@ -25,6 +25,7 @@ in {
   praxis-live          = pkg ./pkgs/praxis-live;
   pugmenu              = pkg ./pkgs/pugmenu;
   reaper               = pkg ./pkgs/reaper;
+  scarlett-mixer       = pkg ./pkgs/scarlett-mixer;
   tor                  = pkg ./pkgs/tor;
   troop                = pkg ./pkgs/troop;
   wineasio             = pkg ./pkgs/wineasio;
