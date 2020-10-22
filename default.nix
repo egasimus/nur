@@ -16,6 +16,7 @@ in {
   gh                   = pkg ./pkgs/gh;
   gxkb                 = pkg ./pkgs/gxkb;
   hydra                = pkg ./pkgs/hydra;
+  jack-midi-clock      = pkg ./pkgs/jack-midi-clock;
   orjail               = pkg ./pkgs/orjail;
   ossia                = pkg ./pkgs/ossia;
   pavucontrol-vertical = pkg ./pkgs/pavucontrol-vertical;
