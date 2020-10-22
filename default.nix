@@ -12,6 +12,7 @@ in {
   arcan                = pkg ./pkgs/arcan;
   butterflow           = pkg ./pkgs/butterflow;
   caprine              = pkg ./pkgs/caprine;
+  chkservice           = pkg ./pkgs/chkservice;
   davinci-resolve      = pkg ./pkgs/davinci-resolve;
   din                  = pkg ./pkgs/din;
   gh                   = pkg ./pkgs/gh;
