@@ -92,8 +92,8 @@ in lib.makeScope newScope (self: {
     distPhase    = electronHelpers.subdirDistPhase electron pname "marabu";
   }) {};
 
-  pilot = callPackage ({ pkgs, stdenv, electron_5, mkYarnPackage }: let
-    electron = electron_5;
+  pilot = callPackage ({ pkgs, stdenv, electron_6, mkYarnPackage }: let
+    electron = electron_6;
     rev      = "3a2afc0ca9d9d09b008de1410b7f08cad92036c6";
     sha256   = "1pd1zgsyfh83lvwnzmn4krnrp0m54aw10253ckjpqkz8j8va84j3";
   in mkYarnPackage rec {
