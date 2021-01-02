@@ -1,0 +1,12 @@
+{buildFHSUserEnv,fetchurl,...}: let
+  installer = "DaVinci_Resolve_16.2.6_Linux.run";
+in buildFHSUserEnv rec {
+  name = "davinci-resolve";
+  targetPkgs = pkgs: with pkgs; [xorg.libxcb qt4 libGL fuse glib zlib gnome3.zenity];
+  multiPkgs = pkgs: [];
+  #runScript = ./DaVinci_Resolve_16.2.6_Linux.run;
+  meta = {
+    broken = true;
+    license.free = false;
+  };
+}
