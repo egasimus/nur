@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, bash }: let
+{ stdenv, fetchFromGitHub, bash, bc }: let
   rev = "a0b9e6c60b5952dcb286cceb595b29f9fd36ae95";
 in stdenv.mkDerivation rec {
   name = "orjail-${rev}";
@@ -16,4 +16,5 @@ in stdenv.mkDerivation rec {
     mv usr/sbin/orjail $out/bin
   '';
   nativeBuildInputs = [ bash ];
+  propagatedBuildInputs = [ bc ];
 }
