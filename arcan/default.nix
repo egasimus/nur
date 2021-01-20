@@ -179,20 +179,35 @@ in {
 
 } // (let
 
-  mkArcanAppl = { name, src, applRoot }: callPackage ({ pkgs }: derive {
-    name = name;
-    src = src;
-    nativeBuildInputs = with pkgs; [ envsubst pkg-config ];
-    buildInputs = [ arcan ];
-    installPhase = ''
-      mkdir -p $out/${name} $out/bin
-      cp -r ./${applRoot}/* $out/${name}/
-      Arcan=${arcan} Appls=$out Appl=${name} envsubst \
-        < ${./Arcan.wrapper} \
-        > $out/bin/arcan.${name}
-      chmod +x $out/bin/arcan.${name}
-    '';
-  }) {};
+  mkArcanAppl = { name, src, applRoot }: callPackage (
+    { bash
+    , pkg-config
+    }: derive {
+      name = name;
+      src = src;
+      nativeBuildInputs = [ pkg-config ];
+      buildInputs = [ arcan ];
+      installPhase = ''
+
+        mkdir -p $out/bin $out/share/${name} $out/share/wayland-sessions
+
+        # add appl code
+        cp -r ./${applRoot}/* $out/share/${name}/
+
+        # create executable wrapper
+        echo -e "#!${bash}/bin/bash\nexec /run/wrappers/bin/arcan $out/share/${name}" \
+          > $out/bin/${name}
+        chmod +x $out/bin/${name}
+
+        # create session wrapper
+        echo -e "[Desktop Entry]\nName=${name} on Arcan ${arcanRev}\nComment=Next Generation Window Manager\nExec=$out/bin/durden\nType=Application" \
+          > $out/share/wayland-sessions/${name}.desktop
+        chmod +x $out/share/wayland-sessions/${name}.desktop
+
+      '';
+      passthru.providedSessions = [ name ];
+    }
+  ) {};
 
 in {
 
@@ -231,7 +246,7 @@ in {
     applRoot = "durden";
   };
 
-  safespaces = mkArcanAppl {
+  /*safespaces = mkArcanAppl {
     name = "safespaces";
     src = fetchgit {
       leaveDotGit = true;
@@ -240,6 +255,6 @@ in {
       sha256 = "1jdmiinsd91nnli5hgcn9c6ifj0s6ngbyjwm0z6fim4f8krnh0s9";
     };
     applRoot = "safespaces";
-  };
+  };*/
 
 }))
