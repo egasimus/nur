@@ -3,31 +3,31 @@
 in {
 
   # special
-  lib      = import ./lib { inherit pkgs; }; # functions
-  modules  = import ./modules;               # NixOS modules
-  overlays = import ./overlays;              # nixpkgs overlays
+  lib      = import ./__lib { inherit pkgs; }; # functions
+  modules  = import ./__modules;               # NixOS modules
+  overlays = import ./__overlays;              # nixpkgs overlays
 
   # programs
-  _100r                = pkg ./pkgs/_100r;
-  arcan                = pkg ./pkgs/arcan;
-  butterflow           = pkg ./pkgs/butterflow;
-  caprine              = pkg ./pkgs/caprine;
-  chkservice           = pkg ./pkgs/chkservice;
-  cinelerra-gg         = pkg ./pkgs/cinelerra-gg;
-  #davinci-resolve      = pkg ./pkgs/davinci-resolve;
-  din                  = pkg ./pkgs/din;
-  gh                   = pkg ./pkgs/gh;
-  gxkb                 = pkg ./pkgs/gxkb;
-  hydra                = pkg ./pkgs/hydra;
-  jack_midi_clock      = pkg ./pkgs/jack_midi_clock;
-  orjail               = pkg ./pkgs/orjail;
-  ossia                = pkg ./pkgs/ossia;
-  pavucontrol-vertical = pkg ./pkgs/pavucontrol-vertical;
-  praxis-live          = pkg ./pkgs/praxis-live;
-  pugmenu              = pkg ./pkgs/pugmenu;
-  reaper               = pkg ./pkgs/reaper;
-  scarlett-mixer       = pkg ./pkgs/scarlett-mixer;
-  tor                  = pkg ./pkgs/tor;
-  troop                = pkg ./pkgs/troop;
-  wineasio             = pkg ./pkgs/wineasio;
+  _100r                = pkg ./_100r;
+  arcan                = pkg ./arcan;
+  butterflow           = pkg ./butterflow;
+  caprine              = pkg ./caprine;
+  chkservice           = pkg ./chkservice;
+  cinelerra-gg         = pkg ./cinelerra-gg;
+  #davinci-resolve      = pkg ./davinci-resolve;
+  din                  = pkg ./din;
+  gh                   = pkg ./gh;
+  gxkb                 = pkg ./gxkb;
+  hydra                = pkg ./hydra;
+  jack_midi_clock      = pkg ./jack_midi_clock;
+  orjail               = pkg ./orjail;
+  ossia                = pkg ./ossia;
+  pavucontrol-vertical = pkg ./pavucontrol-vertical;
+  praxis-live          = pkg ./praxis-live;
+  pugmenu              = pkg ./pugmenu;
+  reaper               = pkg ./reaper;
+  scarlett-mixer       = pkg ./scarlett-mixer;
+  tor                  = pkg ./tor;
+  troop                = pkg ./troop;
+  wineasio             = pkg ./wineasio;
 }
