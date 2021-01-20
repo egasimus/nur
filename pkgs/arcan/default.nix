@@ -39,28 +39,13 @@
 
 in lib.makeScope newScope (self: with self; let
 
-  mkArcanAppl = { name, src, applRoot }: callPackage ({ pkgs }: derive {
-    name = name;
-    src = src;
-    nativeBuildInputs = with pkgs; [ envsubst ];
-    buildInputs = [ arcan ];
-    installPhase = ''
-      mkdir -p $out/${name} $out/bin
-      cp -r ./${applRoot}/* $out/${name}/
-      Arcan=${arcan} Appls=$out Appl=${name} envsubst \
-        < ${./Arcan.wrapper} \
-        > $out/bin/arcan.${name}
-      chmod +x $out/bin/arcan.${name}
-    '';
-  }) {};
-
-  arcanRev = "280bb2f1b39da4465e391158d7debba4a8c168c6";
+  arcanRev = "0.6.0.1";
 
   arcanCoreSrc = fetchgit {
     leaveDotGit = true;
     url = "https://github.com/letoram/arcan.git";
     rev = arcanRev;
-    sha256 = "0pzgb8s74na9wr8dy3bgvv23fry2zny4w6kzjyq1q5lnsgma0zqn";
+    sha256 = "1hfqj39klbnh47lv1lbfs4l12kl58l5xkmdmzdc5fi4yg8h56njs";
   };
 
 in {
@@ -70,7 +55,7 @@ in {
   arcan = callPackage ({ pkgs }: derive {
     name = "arcan";
     src = arcanCoreSrc;
-    patches = [ ./Arcan.nosuid.patch ]; # nix refuses to build suid binaries
+    #patches = [ ./Arcan.nosuid.patch ]; # nix refuses to build suid binaries
     postUnpack = '' # add vendored libuvc
       mkdir -p ./arcan/external/git/libuvc
       pushd ./arcan/external/git/
@@ -79,7 +64,13 @@ in {
       shopt -u dotglob nullglob  # phases are stateful
       popd
     '';
-    nativeBuildInputs = with pkgs; [ cmake gcc git ];
+    patchPhase = '' # thanks @ChrisOboe!
+			sed -i "s,SETUID,,g" ./src/CMakeLists.txt
+			substituteInPlace ./src/platform/posix/paths.c \
+				--replace "/usr/bin" "$out/bin" \
+				--replace "/usr/share" "$out/share"
+    '';
+    nativeBuildInputs = with pkgs; [ cmake gcc git pkg-config ];
     buildInputs = with pkgs; [
       apr
       espeak-classic
@@ -143,7 +134,7 @@ in {
   acfgfs = callPackage ({ pkgs }: derive {
     name = "acfgfs";
     src = arcanCoreSrc;
-    nativeBuildInputs = with pkgs; [ cmake gcc git ];
+    nativeBuildInputs = with pkgs; [ cmake gcc git pkg-config ];
     buildInputs = [ arcan ] ++ (with pkgs; [ fuse3 ]);
     cmakeFlags = concat ((arcanIncludeDirs arcan) ++ [ "../src/tools/acfgfs" ]);
   }) {};
@@ -160,7 +151,7 @@ in {
   aloadimage = callPackage ({ pkgs }: derive {
     name = "aloadimage";
     src = arcanCoreSrc;
-    nativeBuildInputs = with pkgs; [ cmake gcc git ];
+    nativeBuildInputs = with pkgs; [ cmake gcc git pkg-config ];
     buildInputs = [ arcan ];
     cmakeFlags = concat ((arcanIncludeDirs arcan) ++ [ "../src/tools/aloadimage" ]);
   }) {};
@@ -168,7 +159,7 @@ in {
   shmmon = callPackage ({ pkgs }: derive {
     name = "shmmon";
     src = arcanCoreSrc;
-    nativeBuildInputs = with pkgs; [ cmake gcc git ];
+    nativeBuildInputs = with pkgs; [ cmake gcc git pkg-config ];
     buildInputs = [ arcan ];
     cmakeFlags = concat ((arcanIncludeDirs arcan) ++ [ "../src/tools/shmmon" ]);
   }) {};
@@ -186,15 +177,34 @@ in {
     #);
   #}) {};
 
+} // (let
+
+  mkArcanAppl = { name, src, applRoot }: callPackage ({ pkgs }: derive {
+    name = name;
+    src = src;
+    nativeBuildInputs = with pkgs; [ envsubst pkg-config ];
+    buildInputs = [ arcan ];
+    installPhase = ''
+      mkdir -p $out/${name} $out/bin
+      cp -r ./${applRoot}/* $out/${name}/
+      Arcan=${arcan} Appls=$out Appl=${name} envsubst \
+        < ${./Arcan.wrapper} \
+        > $out/bin/arcan.${name}
+      chmod +x $out/bin/arcan.${name}
+    '';
+  }) {};
+
+in {
+
   # arcan appls
 
   awb = mkArcanAppl {
     name = "awb";
     src = fetchgit {
       leaveDotGit = true;
-      url = "https://github.com/letoram/awb.git";
-      rev = "271ef7ffd7f24569d2f836198e4c96b8c617e372";
-      sha256 = "1jdmiinsd91nnli5hgcn9c6ifj0s6ngbyjwm0z6fim4f8krnh0s8";
+      url    = "https://github.com/letoram/awb.git";
+      rev    = "271ef7ffd7f24569d2f836198e4c96b8c617e372";
+      sha256 = "0g6g493ygabhwfknjlp2rg14iq7njsgh5qll01p2g1i9qvwbbhvq";
     };
     applRoot = "";
   };
@@ -232,4 +242,4 @@ in {
     applRoot = "safespaces";
   };
 
-})
+}))
