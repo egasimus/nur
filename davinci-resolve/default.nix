@@ -60,38 +60,37 @@
          "product": "DaVinci Resolve" 
       }'';
     };
-    script = ''
-      REQJSON="$(  printf '%s' "$REQJSON"   | sed 's/[[:space:]]\+/ /g')"
-      USERAGENT="$(printf '%s' "$USERAGENT" | sed 's/[[:space:]]\+/ /g')"
-      RESOLVEURL=$(curl \
-           -s \
-           -H 'Host: www.blackmagicdesign.com' \
-           -H 'Accept: application/json, text/plain, */*' \
-           -H 'Origin: https://www.blackmagicdesign.com' \
-           -H "$USERAGENT" \
-           -H 'Content-Type: application/json;charset=UTF-8' \
-           -H "Referer: https://www.blackmagicdesign.com/support/download/$REFERID/Linux" \
-           -H 'Accept-Encoding: gzip, deflate, br' \
-           -H 'Accept-Language: en-US,en;q=0.9' \
-           -H 'Authority: www.blackmagicdesign.com' \
-           -H 'Cookie: _ga=GA1.2.1849503966.1518103294; _gid=GA1.2.953840595.1518103294' \
-           --data-ascii "$REQJSON" \
-           --compressed \
-           "$SITEURL")
-      curl --retry 3 --retry-delay 3 \
-           -H "Host: sw.blackmagicdesign.com" \
-           -H "Upgrade-Insecure-Requests: 1" \
-           -H "$USERAGENT" \
-           -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8" \
-           -H "Accept-Language: en-US,en;q=0.9" \
-           --compressed \
-           "$RESOLVEURL" \
-           > resolve.zip
-      mkdir -p $out
-      unzip resolve.zip -d $out
-      rm resolve.zip
-    '';
-  in runCommand name context script;
+  in runCommand name context ''
+    REQJSON="$(  printf '%s' "$REQJSON"   | sed 's/[[:space:]]\+/ /g')"
+    USERAGENT="$(printf '%s' "$USERAGENT" | sed 's/[[:space:]]\+/ /g')"
+    RESOLVEURL=$(curl \
+         -s \
+         -H 'Host: www.blackmagicdesign.com' \
+         -H 'Accept: application/json, text/plain, */*' \
+         -H 'Origin: https://www.blackmagicdesign.com' \
+         -H "$USERAGENT" \
+         -H 'Content-Type: application/json;charset=UTF-8' \
+         -H "Referer: https://www.blackmagicdesign.com/support/download/$REFERID/Linux" \
+         -H 'Accept-Encoding: gzip, deflate, br' \
+         -H 'Accept-Language: en-US,en;q=0.9' \
+         -H 'Authority: www.blackmagicdesign.com' \
+         -H 'Cookie: _ga=GA1.2.1849503966.1518103294; _gid=GA1.2.953840595.1518103294' \
+         --data-ascii "$REQJSON" \
+         --compressed \
+         "$SITEURL")
+    curl --retry 3 --retry-delay 3 \
+         -H "Host: sw.blackmagicdesign.com" \
+         -H "Upgrade-Insecure-Requests: 1" \
+         -H "$USERAGENT" \
+         -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8" \
+         -H "Accept-Language: en-US,en;q=0.9" \
+         --compressed \
+         "$RESOLVEURL" \
+         > resolve.zip
+    mkdir -p $out
+    unzip resolve.zip -d $out
+    rm resolve.zip
+  '';
 
   unpacked = let
     name = "${pname}-${version}-unpacked";

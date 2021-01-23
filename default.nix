@@ -32,7 +32,8 @@ in {
   # video
   butterflow           = pkg ./butterflow;
   cinelerra-gg         = pkg ./cinelerra-gg;
-  #davinci-resolve      = pkg ./davinci-resolve;
+  davinci-resolve      = pkg ./davinci-resolve;
+  hydralisque          = pkg ./hydralisque;
 
   # audio
   din                  = pkg ./din;
