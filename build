@@ -1,3 +1,6 @@
 #!/bin/sh
-NixExpression="(import <nixpkgs> {}).callPackage ./$1 {}"
-time nix-build -E "$NixExpression" --show-trace --verbose
+NixPkgs="<nixpkgs>"
+#NixPkgs="../NixOS_nixpkgs"
+Overlay="./overlay.nix"
+Expr="(import $NixPkgs {overlays=[(import $Overlay)];}).$1"
+time nix-build -E "$Expr" --show-trace --verbose

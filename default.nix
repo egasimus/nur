@@ -2,7 +2,7 @@
   pkg = x: pkgs.callPackage x {};
 in {
 
-  # special
+  # special (FIXME how are they used?)
   lib      = import ./__lib { inherit pkgs; }; # functions
   modules  = import ./__modules;               # NixOS modules
   overlays = import ./__overlays;              # nixpkgs overlays
