@@ -7,33 +7,35 @@ in {
   modules  = import ./__modules;               # NixOS modules
   overlays = import ./__overlays;              # nixpkgs overlays
 
-  chkservice           = pkg ./chkservice;
-
-  # clients
-  caprine              = pkg ./caprine;
-  gh                   = pkg ./gh;
-
-  # gui
-  arcan                = pkg ./arcan;
-  gxkb                 = pkg ./gxkb;
-  pugmenu              = pkg ./pugmenu;
+  chkservice = pkg ./chkservice;
 
   # network
-  orjail               = pkg ./orjail;
-  tor                  = pkg ./tor;
+  orjail = pkg ./orjail;
+  tor    = pkg ./tor;
+
+  # electron
+  caprine             = pkg ./caprine; # TODO caprine-tor
+  gh                  = pkg ./gh;
+  ledger-live-desktop = pkg ./ledger-live-desktop;
+  standardnotes       = pkg ./standardnotes;
+
+  # gui
+  arcan   = pkg ./arcan;
+  gxkb    = pkg ./gxkb;
+  pugmenu = pkg ./pugmenu;
 
   # art
-  _100r                = pkg ./_100r;
-  hydra                = pkg ./hydra;
-  ossia                = pkg ./ossia;
-  praxis-live          = pkg ./praxis-live;
-  troop                = pkg ./troop;
+  _100r       = pkg ./_100r;
+  hydra       = pkg ./hydra;
+  ossia       = pkg ./ossia;
+  praxis-live = pkg ./praxis-live;
+  troop       = pkg ./troop;
 
   # video
-  butterflow           = pkg ./butterflow;
-  cinelerra-gg         = pkg ./cinelerra-gg;
-  davinci-resolve      = pkg ./davinci-resolve;
-  hydralisque          = pkg ./hydralisque;
+  butterflow      = pkg ./butterflow;
+  cinelerra-gg    = pkg ./cinelerra-gg;
+  davinci-resolve = pkg ./davinci-resolve;
+  hydralisque     = pkg ./hydralisque;
 
   # audio
   din                  = pkg ./din;
