@@ -5,18 +5,18 @@
 , glib
 , gobject-introspection
 , gtk3
-, nodejs-14_x
+, nodejs-12_x
 , pkg-config
 , python2
 , runCommand
 , yarn
 }: let
 
-  node       = nodejs-14_x;
+  node       = nodejs-12_x;
   rev        = "9b98f5f";
   sha256     = "0cgz9556y21da2dmf3zcr30p71ba3pkxbrlbbnhl89f44zswg5ry";
-  outputHash = "1zk1wm13sbs4jpr9g47yy7aq4vrm198b1psnbw750jlclhj5w2dw";
-  mkNodePackage = (import ../mk-node-package.nix) { inherit lib runCommand; };
+  outputHash = "1q3nkfng7zbxgl5khflcfdd559ch79rdy4pdc6d9jmz20xglv171";
+  mkNodePackage = (import ../mkNodePackage.nix) { inherit lib runCommand; };
 
 in mkNodePackage {
 
@@ -34,6 +34,7 @@ in mkNodePackage {
   inherit outputHash;
   entryPoint = ''
     #!/bin/sh
+    yarn versions
     pushd $(dirname $(dirname $0))
     ${node.out}/bin/node pugmenu $@
   '';

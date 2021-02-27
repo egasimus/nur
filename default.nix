@@ -1,16 +1,15 @@
 { pkgs ? import <nixpkgs> {} }: let
   pkg = x: pkgs.callPackage x {};
 in {
-  davinci-resolve = pkg ./bin/davinci-resolve;
-  reaper          = pkg ./bin/reaper;
+  davinci-resolve     = pkg ./bin/davinci-resolve;
+  ledger-live-desktop = pkg ./bin/ledger-live-desktop;
+  standardnotes       = pkg ./bin/standardnotes;
+  reaper              = pkg ./bin/reaper;
 
   _100r               = pkg ./js/_100r;
   caprine             = pkg ./js/caprine; # TODO caprine-tor
-  hydra               = pkg ./js/hydra;
   hydralisque         = pkg ./js/hydralisque;
-  ledger-live-desktop = pkg ./js/ledger-live-desktop;
   pugmenu             = pkg ./js/pugmenu;
-  standardnotes       = pkg ./js/standardnotes;
 
   arcan                = pkg ./c/arcan;
   butterflow           = pkg ./c/butterflow;

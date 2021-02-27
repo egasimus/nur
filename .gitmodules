@@ -22,3 +22,9 @@
 [submodule "gamestonk-terminal/GamestonkTerminal"]
 	path = gamestonk-terminal/GamestonkTerminal
 	url = git@github.com:DidierRLopes/GamestonkTerminal.git
+[submodule "js/hydralisque/src"]
+	path = js/hydralisque/src
+	url = git@github.com:egasimus/hydralisque.git
+[submodule "js/pugmenu/src"]
+	path = js/pugmenu/src
+	url = git@github.com:egasimus/pugmenu.git
