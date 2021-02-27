@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="links/style.css"/>
+    <title>Pilot</title>
+  </head>
+  <body>
+    <script type="module">
+      import Pilot from "js:./sources/scripts/pilot.js"
+      import Controller from "js:./sources/scripts/lib/controller.js"
+
+      const webFrame = require('electron').webFrame
+      const {dialog,app} = require('electron').remote;
+      const pilot = new Pilot()
+      const controller = new Controller()
+
+      controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Pilot') },"CmdOrCtrl+,")
+      controller.add("default","*","Fullscreen",() => { app.toggleFullscreen() },"CmdOrCtrl+Enter")
+      controller.add("default","*","Hide",() => { app.toggleVisible() },"CmdOrCtrl+H")
+      controller.add("default","*","Inspect",() => { app.inspect() },"CmdOrCtrl+.")
+      controller.add("default","*","Reset",() => { pilot.mixer.reset() },"CmdOrCtrl+Backspace")
+      controller.add("default","*","Quit",() => { app.exit() },"CmdOrCtrl+Q")
+
+      controller.add("default","File","Record",() => { pilot.recorder.toggle() },"CmdOrCtrl+R")
+      controller.add("default","File","Stop Recording",() => { pilot.recorder.stop() },"Escape")
+
+      controller.addRole('default', 'Edit', 'undo')
+      controller.addRole('default', 'Edit', 'redo')
+      controller.addRole('default', 'Edit', 'cut')
+      controller.addRole('default', 'Edit', 'copy')
+      controller.addRole('default', 'Edit', 'paste')
+      controller.addRole('default', 'Edit', 'delete')
+      controller.addRole('default', 'Edit', 'selectall')
+
+      controller.add("default","View","Zoom In",() => { pilot.modZoom(0.25) },"CmdOrCtrl+=")
+      controller.add("default","View","Zoom Out",() => { pilot.modZoom(-0.25) },"CmdOrCtrl+-")
+      controller.add("default","View","Zoom Reset",() => { pilot.modZoom(1,true) },"CmdOrCtrl+0")
+      controller.add("default","View","Toggle Animations",() => { pilot.toggleAnimations() },"`")
+
+      controller.add("default","Theme","Open Theme",() => { pilot.theme.open() },"CmdOrCtrl+Shift+O")
+      controller.add("default","Theme","Reset Theme",() => { pilot.theme.reset() },"CmdOrCtrl+Shift+Backspace")
+      controller.add("default","Theme","Download Themes..",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Themes') })
+
+      controller.commit()
+
+      pilot.install(document.body)
+      pilot.start();
+    </script>
+  </body>
+</html>

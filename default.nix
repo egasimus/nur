@@ -1,30 +1,37 @@
 { pkgs ? import <nixpkgs> {} }: let
   pkg = x: pkgs.callPackage x {};
 in {
-  _100r                = pkg ./_100r;
-  arcan                = pkg ./arcan;
-  butterflow           = pkg ./butterflow;
-  caprine              = pkg ./caprine; # TODO caprine-tor
-  chkservice           = pkg ./chkservice;
-  cinelerra-gg         = pkg ./cinelerra-gg;
-  davinci-resolve      = pkg ./davinci-resolve;
-  din                  = pkg ./din;
-  gamestonk-terminal   = pkg ./gamestonk-terminal;
-  gh                   = pkg ./gh;
-  gxkb                 = pkg ./gxkb;
-  hydra                = pkg ./hydra;
-  hydralisque          = pkg ./hydralisque;
-  jack_midi_clock      = pkg ./jack_midi_clock;
-  ledger-live-desktop  = pkg ./ledger-live-desktop;
-  orjail               = pkg ./orjail;
-  ossia                = pkg ./ossia;
-  pavucontrol-vertical = pkg ./pavucontrol-vertical;
-  praxis-live          = pkg ./praxis-live;
-  pugmenu              = pkg ./pugmenu;
-  reaper               = pkg ./reaper;
-  scarlett-mixer       = pkg ./scarlett-mixer;
-  standardnotes        = pkg ./standardnotes;
-  tor                  = pkg ./tor;
-  troop                = pkg ./troop;
-  wineasio             = pkg ./wineasio;
+  davinci-resolve = pkg ./bin/davinci-resolve;
+  reaper          = pkg ./bin/reaper;
+
+  _100r               = pkg ./js/_100r;
+  caprine             = pkg ./js/caprine; # TODO caprine-tor
+  hydra               = pkg ./js/hydra;
+  hydralisque         = pkg ./js/hydralisque;
+  ledger-live-desktop = pkg ./js/ledger-live-desktop;
+  pugmenu             = pkg ./js/pugmenu;
+  standardnotes       = pkg ./js/standardnotes;
+
+  arcan                = pkg ./c/arcan;
+  butterflow           = pkg ./c/butterflow;
+  chkservice           = pkg ./c/chkservice;
+  cinelerra-gg         = pkg ./c/cinelerra-gg;
+  din                  = pkg ./c/din;
+  gxkb                 = pkg ./c/gxkb;
+  jack_midi_clock      = pkg ./c/jack_midi_clock;
+  orjail               = pkg ./c/orjail;
+  ossia                = pkg ./c/ossia;
+  pavucontrol-vertical = pkg ./c/pavucontrol-vertical;
+  scarlett-mixer       = pkg ./c/scarlett-mixer;
+  tor                  = pkg ./c/tor;
+  wineasio             = pkg ./c/wineasio;
+
+  gamestonk-terminal = pkg ./py/gamestonk-terminal;
+  troop              = pkg ./py/troop;
+
+  gh      = pkg ./go/gh;
+  traitor = pkg ./go/traitor;
+
+  praxis-live = pkg ./java/praxis-live;
+
 }

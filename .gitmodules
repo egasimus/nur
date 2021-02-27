@@ -16,3 +16,9 @@
 [submodule "_100r/Pilot"]
 	path = _100r/Pilot
 	url = git@github.com:hundredrabbits/Pilot.git
+[submodule "caprine/caprine"]
+	path = caprine/caprine
+	url = git@github.com:sindresorhus/caprine.git
+[submodule "gamestonk-terminal/GamestonkTerminal"]
+	path = gamestonk-terminal/GamestonkTerminal
+	url = git@github.com:DidierRLopes/GamestonkTerminal.git
