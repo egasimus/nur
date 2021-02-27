@@ -19,7 +19,7 @@
   # changes in this indicate changes to the build output
   output   = "0m4xvzda969zkdca724qx3zqb56n5w59q89lm9lwvhfs6mzrxc6r";
 
-}; in ((import ../__lib/mkNodePackage.nix) {inherit lib runCommand;}) {
+}; in ((import ../mkNodePackage.nix) {inherit lib runCommand;}) {
   name = "hydralisque-git";
   meta = {
     description = "video masher based on Olivia Jack's Hydra";

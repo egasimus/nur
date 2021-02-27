@@ -1,5 +1,4 @@
 {
-
   wrapHTML = electron: name: main: ''
     mkdir -p $out/lib/${name}
     cp -r $src/* $out/lib/${name}
