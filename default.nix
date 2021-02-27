@@ -1,47 +1,30 @@
 { pkgs ? import <nixpkgs> {} }: let
   pkg = x: pkgs.callPackage x {};
 in {
-
-  # special (FIXME how are they used?)
-  lib      = import ./__lib { inherit pkgs; }; # functions
-  modules  = import ./__modules;               # NixOS modules
-  overlays = import ./__overlays;              # nixpkgs overlays
-
-  chkservice = pkg ./chkservice;
-
-  # network
-  orjail = pkg ./orjail;
-  tor    = pkg ./tor;
-
-  # electron
-  caprine             = pkg ./caprine; # TODO caprine-tor
-  gh                  = pkg ./gh;
-  ledger-nano-desktop = pkg ./ledger-nano-desktop;
-  standardnotes       = pkg ./standardnotes;
-
-  # gui
-  arcan   = pkg ./arcan;
-  gxkb    = pkg ./gxkb;
-  pugmenu = pkg ./pugmenu;
-
-  # art
-  _100r       = pkg ./_100r;
-  hydra       = pkg ./hydra;
-  ossia       = pkg ./ossia;
-  praxis-live = pkg ./praxis-live;
-  troop       = pkg ./troop;
-
-  # video
-  butterflow      = pkg ./butterflow;
-  cinelerra-gg    = pkg ./cinelerra-gg;
-  davinci-resolve = pkg ./davinci-resolve;
-  hydralisque     = pkg ./hydralisque;
-
-  # audio
+  _100r                = pkg ./_100r;
+  arcan                = pkg ./arcan;
+  butterflow           = pkg ./butterflow;
+  caprine              = pkg ./caprine; # TODO caprine-tor
+  chkservice           = pkg ./chkservice;
+  cinelerra-gg         = pkg ./cinelerra-gg;
+  davinci-resolve      = pkg ./davinci-resolve;
   din                  = pkg ./din;
+  gamestonk-terminal   = pkg ./gamestonk-terminal;
+  gh                   = pkg ./gh;
+  gxkb                 = pkg ./gxkb;
+  hydra                = pkg ./hydra;
+  hydralisque          = pkg ./hydralisque;
   jack_midi_clock      = pkg ./jack_midi_clock;
+  ledger-live-desktop  = pkg ./ledger-live-desktop;
+  orjail               = pkg ./orjail;
+  ossia                = pkg ./ossia;
   pavucontrol-vertical = pkg ./pavucontrol-vertical;
+  praxis-live          = pkg ./praxis-live;
+  pugmenu              = pkg ./pugmenu;
   reaper               = pkg ./reaper;
   scarlett-mixer       = pkg ./scarlett-mixer;
+  standardnotes        = pkg ./standardnotes;
+  tor                  = pkg ./tor;
+  troop                = pkg ./troop;
   wineasio             = pkg ./wineasio;
 }

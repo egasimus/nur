@@ -13,11 +13,11 @@ let
 
   sha256 = {
     i386-linux = "2ccdf23588b09d645811e562d4fd7e02ac0e367bf2b34e373d8470d48544036d";
-    x86_64-linux = "6366d0a37cbf2cf51008a666e40bada763dd1539173de01e093bcbe4146a6bd8";
+    x86_64-linux = "1zrnvvr9x0s2gp948iajsmgn38xm6x0g2dgxrfjis39rpplsrdww";
   }.${stdenv.hostPlatform.system};
 
   src = fetchurl {
-    url = "https://github.com/standardnotes/desktop/releases/download/v${version}/standard-notes-${version}${plat}.AppImage";
+    url = "https://github.com/standardnotes/desktop/releases/download/v3.5.18/standard-notes-3.5.18-linux-x86_64.AppImage";
     inherit sha256;
   };
 
@@ -29,6 +29,8 @@ let
 
 in appimageTools.wrapType2 rec {
   inherit name src;
+
+  extraPkgs = pkgs: [ pkgs.gnome3.libsecret ];
 
   extraInstallCommands = ''
     # directory in /nix/store so readonly

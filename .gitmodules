@@ -1,0 +1,18 @@
+[submodule "_100r/Dotgrid"]
+	path = _100r/Dotgrid
+	url = git@github.com:hundredrabbits/Dotgrid.git
+[submodule "_100r/Ronin"]
+	path = _100r/Ronin
+	url = git@github.com:hundredrabbits/Ronin.git
+[submodule "_100r/Left"]
+	path = _100r/Left
+	url = git@github.com:hundredrabbits/Left.git
+[submodule "_100r/Orca"]
+	path = _100r/Orca
+	url = git@github.com:hundredrabbits/Orca.git
+[submodule "_100r/Marabu"]
+	path = _100r/Marabu
+	url = git@github.com:hundredrabbits/Marabu.git
+[submodule "_100r/Pilot"]
+	path = _100r/Pilot
+	url = git@github.com:hundredrabbits/Pilot.git
